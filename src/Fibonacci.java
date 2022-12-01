@@ -1,5 +1,3 @@
-package Fibonacci;
-
 public class Fibonacci {
     public static void main(String[] args){
         int firstNumber = 0;
