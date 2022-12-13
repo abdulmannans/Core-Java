@@ -17,7 +17,6 @@ class Arithmetic{
         return false;
     }
     private static boolean isNumberAtEndAndBegin(String expression){
-
         if(expression.length() == 3){
             if(Pattern.matches(regexForSmallEquation, String.valueOf(expression.charAt(0)))){
                 return Pattern.matches(regexForSmallEquation, String.valueOf(expression.charAt(expression.length()-1)));
@@ -71,7 +70,7 @@ class Arithmetic{
         return false;
     }
 
-    private static HashMap<String, HashMap<Integer, String>> getNumberArray(char[] expressionArray){
+    private static HashMap<String, HashMap<Integer, String>> getExpressionArray(char[] expressionArray){
         HashMap<String, HashMap<Integer, String>> responseArray = new HashMap<String, HashMap<Integer, String>>();
         HashMap<Integer, String> numberArray = new HashMap<Integer, String>();
         HashMap<Integer, String> operatorsArray = new HashMap<Integer, String>();
@@ -112,7 +111,7 @@ class Arithmetic{
     }
     private static String solveExpression(String expression){
         char[] expressionArray = expression.toCharArray();
-        HashMap<String, HashMap<Integer, String>> response = getNumberArray(expressionArray);
+        HashMap<String, HashMap<Integer, String>> response = getExpressionArray(expressionArray);
         HashMap<Integer, String> numberArray = response.get("numbers");
         HashMap<Integer, String> operatorsArray = response.get("operators");
         for (char opr : operators){
@@ -126,7 +125,7 @@ class Arithmetic{
                                 numOne = Double.parseDouble(numberArray.get(key-1));
                                 keyOne = key - 1;
                                 numTwo = Double.parseDouble(numberArray.get(key+1));
-                                keyTwo = key + 2;
+                                keyTwo = key + 1;
                             }else if(numberArray.containsKey(key -1) || numberArray.containsKey(key+1)){
                                 if(numberArray.containsKey(key-1)){
                                     numOne = Double.parseDouble(numberArray.get(key-1));
@@ -192,11 +191,12 @@ class Arithmetic{
         }
         return "Invalid Expression";
     }
+
 }
 
 public class Calculator extends Arithmetic {
     public static void main(String[] args){
-        String s1 = "99+98+9/2/3/3";
-        System.out.println(getSolution(s1));
+        String expression = "4*5-2+12+3";
+        System.out.println(getSolution(expression));
     }
 }
